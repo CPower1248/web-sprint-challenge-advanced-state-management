@@ -1,6 +1,10 @@
 import React from 'react';
+import { connect } from "react-redux"
 
 class AddForm extends React.Component {
+    state = {
+        
+    }
 
     render() {
         return(<section>
@@ -18,7 +22,7 @@ class AddForm extends React.Component {
     }
 }
 
-export default AddForm;
+export default connect(null)(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.
