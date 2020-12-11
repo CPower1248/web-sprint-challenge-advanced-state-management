@@ -1,18 +1,47 @@
 import React from 'react';
 import { connect } from "react-redux"
+import { addSmurf } from "../actions"
 
 class AddForm extends React.Component {
     state = {
-        
+        iName: "",
+        iPosition: "",
+        iNickname: "",
+        iDescription: ""
+    }
+
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.addSmurf({
+            name: this.state.iName, 
+            position: this.state.iPosition,
+            nickname: this.state.iNickname,
+            description: this.state.iDescription,
+            id: Math.round(Math.random() * 10000)
+        })
+        this.setState({iName: "", iPosition: "", iNickname: "", iDescription: ""})
     }
 
     render() {
+        console.log("FORM: ", this.state)
         return(<section>
             <h2>Add Smurf</h2>
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Name:</label><br/>
-                    <input onChange={this.handleChange} name="name" id="name" />
+                    <input onChange={this.handleChange} name="iName" id="name" value={this.state.iName} />
+                    <label htmlFor="name">Position:</label><br/>
+                    <input onChange={this.handleChange} name="iPosition" id="position" value={this.state.iPosition} />
+                    <label htmlFor="name">Nickname:</label><br/>
+                    <input onChange={this.handleChange} name="iNickname" id="nickname" value={this.state.iNickname} />
+                    <label htmlFor="name">Description:</label><br/>
+                    <input onChange={this.handleChange} name="iDescription" id="description" value={this.state.iDescription} />
                 </div>
 
                 <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
@@ -22,7 +51,13 @@ class AddForm extends React.Component {
     }
 }
 
-export default connect(null)(AddForm);
+const mapStateToProps = state => {
+    return {
+        smurfs: state.smurfs
+    }
+}
+
+export default connect(mapStateToProps, { addSmurf })(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.

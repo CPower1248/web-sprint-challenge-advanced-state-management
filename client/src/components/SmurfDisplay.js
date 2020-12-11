@@ -9,7 +9,6 @@ export class SmurfDisplay extends React.Component {
     }    
 
     render() {
-        console.log(this.props)
         return(<div>
             <h1>Smurf Village Residents</h1>
             {this.props.isLoading ? <h2>The Smurfs are coming!</h2> : ""}
