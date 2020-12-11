@@ -7,7 +7,8 @@ class AddForm extends React.Component {
         iName: "",
         iPosition: "",
         iNickname: "",
-        iDescription: ""
+        iDescription: "",
+        error: "All fields must be filled out"
     }
 
     handleChange = e => {
@@ -43,8 +44,12 @@ class AddForm extends React.Component {
                     <label htmlFor="name">Description:</label><br/>
                     <input onChange={this.handleChange} name="iDescription" id="description" value={this.state.iDescription} />
                 </div>
+                {/* I know this isn't right but it's all I've got rn :/ */}
+                {!this.state.iName || !this.state.iPosition || !this.state.iNickname || !this.state.iDescription ? 
+                    <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.state.error}</div> : 
+                    <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>}
 
-                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
+                {/* <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div> */}
                 <button>Submit Smurf</button>
             </form>
         </section>);
